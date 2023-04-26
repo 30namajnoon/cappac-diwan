@@ -1,0 +1,226 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: 'Dosis', sans-serif;
+}
+
+input[type = "file"] {
+    display: none;
+}
+
+canvas {
+    position: relative;
+    width: 100vw;
+    height: 50vw;
+    box-shadow: 2px 2px 7px black; 
+}
+
+body {
+     background-color: rgb(168, 47, 47);
+}
+
+.addNewProduct-container {
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(168, 47, 47);
+}
+.addNewProduct-container a {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: brown;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgb(24, 24, 24);
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: all .5s;
+
+}
+.addNewProduct-container a:hover {
+    box-shadow: 2px 2px 8px rgb(24, 24, 24);
+    width: 205px;
+}
+.addNewProduct-container input[type = "button"] {
+     width: 200px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: brown;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgb(34, 34, 34);
+    text-decoration: none;
+    transition: all .5s;
+}
+.addNewProduct-container input[type = "button"]:hover {
+    box-shadow: 2px 2px 8px rgb(24, 24, 24);
+    width: 205px;
+}
+
+
+
+.modelsData-container {
+    width: 100vw;
+    height: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.modelsData-container .projectName {
+    box-shadow: 2px 2px 7px black; 
+    width: 100%;
+    padding: .5vw;
+    color: white;
+    font-size: 2vw;
+    box-sizing: border-box;
+}
+
+.modelsData-container .dataContainer {
+    width: 97%;
+    height: 40vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 7px black;
+    margin-top: 2vh;
+    position: relative;
+    padding-bottom: 10vh;
+}
+.modelsData-container .dataContainer .modelSize-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow:  0px 0px 7px black;
+    margin-top: 2vh;
+    border-radius: .3vw;
+    
+}
+
+.modelsData-container .dataContainer .modelSize-container .cContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.modelsData-container .dataContainer .modelSize-container .cContainer .cName {
+    padding: 0.5vw 10vw 0.5vw 0.5vw;
+    border-bottom: 0.1vw solid rgb(46, 46, 46);
+    color: rgb(223, 223, 223);
+    box-shadow: 0px 7px 7px -6px black;
+     font-size: 1.5vw;
+
+}
+.modelsData-container .dataContainer .modelSize-container .cContainer .cValue {
+    padding: 0.5vw 10vw 0.5vw 0.5vw;
+    color: rgb(168, 47, 47);
+    background-color: rgb(175, 175, 175);
+     font-size: 1.5vw;
+    
+   
+
+}
+
+.modelsData-container .dataContainer .modelName {
+    padding: 1vw;
+    font-size: 1.5vw;
+    color: rgb(206, 206, 206);
+    box-shadow: 0px 0px 7px black;
+    padding: .5vw 5vw .5vw 5vw;
+    border-radius: 0 0 1vw 1vw;
+}
+
+#nextLeft {
+    position: fixed;
+    top: 60vh;
+    left: 2vw;
+    color: rgb(236, 236, 236);
+    padding: 0.5vw;
+    box-shadow: 0px 0px 7px black;
+    border-radius: 5vw;
+    font-size: 3vw;
+    user-select: none;
+
+}
+#nextRight {
+    position: fixed;
+    top: 60vh;
+    left: 93%;
+    user-select: none;
+    color: rgb(236, 236, 236);
+    padding: 0.5vw;
+    box-shadow: 0px 0px 7px black;
+    border-radius: 5vw;
+    font-size: 3vw;
+}
+
+
+.modelsData-container .kalinlik {
+    font-size: 1.5vw;
+    color: aliceblue;
+    padding: .5vw 5vw 0.5vw 5vw;
+    border-radius: 0.3vw;
+    box-shadow: 0px 0px 5px black;
+    margin: 1vw;
+}
+.modelsData-container .materialSize-container {
+      position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow:  0px 0px 7px black;
+    
+    border-radius: .3vw;
+}
+.modelsData-container .materialSize-container .cContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.modelsData-container .materialSize-container .cContainer .cName {
+     padding: 0.5vw 5vw 0.5vw 0.5vw;
+    border-bottom: 0.1vw solid rgb(46, 46, 46);
+    color: rgb(223, 223, 223);
+    box-shadow: 0px 7px 7px -6px black;;
+    font-size: 1.5vw;
+}
+.modelsData-container .materialSize-container .cContainer .value {
+     padding: 0.5vw 0 0.5vw 0.5vw;
+    color: rgb(168, 47, 47);
+    background-color: rgb(175, 175, 175);
+    border-bottom: solid 0.1vw rgb(168, 47, 47);
+     font-size: 1.5vw;
+}
+.modelsData-container .materialSize-container .cContainer .name {
+     padding: 0.5vw 5vw 0.5vw 0.5vw;
+     color: rgb(223, 223, 223);
+    border-bottom: solid 0.1vw rgb(168, 47, 47);
+     font-size: 1.5vw;
+ 
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: 'Dosis', sans-serif;
+}
+
+input[type = "file"] {
+    display: none;
+}
+
+canvas {
+    position: relative;
+    width: 100vw;
+    height: 50vw;
+    box-shadow: 2px 2px 7px black; 
+}
+
+body {
+     background-color: rgb(168, 47, 47);
+}
+
+.addNewProduct-container {
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(168, 47, 47);
+}
+.addNewProduct-container a {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: brown;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgb(24, 24, 24);
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: all .5s;
+
+}
+.addNewProduct-container a:hover {
+    box-shadow: 2px 2px 8px rgb(24, 24, 24);
+    width: 205px;
+}
+.addNewProduct-container input[type = "button"] {
+     width: 200px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: brown;
+    font-size: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgb(34, 34, 34);
+    text-decoration: none;
+    transition: all .5s;
+}
+.addNewProduct-container input[type = "button"]:hover {
+    box-shadow: 2px 2px 8px rgb(24, 24, 24);
+    width: 205px;
+}
+
+
+
+.modelsData-container {
+    width: 100vw;
+    height: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.modelsData-container .projectName {
+    box-shadow: 2px 2px 7px black; 
+    width: 100%;
+    padding: .5vw;
+    color: white;
+    font-size: 2vw;
+    box-sizing: border-box;
+}
+    </style>
+</head>
+<body>
+    <!-- <input type="file" id="file"> -->
+    <!-- <a href="./server.js" download="sina">sina</a> -->
+    <!-- <script>
+
+        let file = document.getElementById("file");
+        file.addEventListener("change",()=> {
+           
+            let http = new XMLHttpRequest();
+            http.open("POST","http://localhost:4000/dataDownload",true);
+            let formData = new FormData();
+            formData.append("file",file.files[0]);
+            formData.append("fileName",file.name);
+            http.onreadystatechange = function() {
+                if(http.readyState = 4 && http.status == 200) {
+                    console.log(http.responseText);
+                }
+            }
+            http.send(formData);
+        })
+
+
+
+        /////  set data
+
+        const data = JSON.parse('[["JALIL MAHMOOD  (DOLAB)",null,null,null,null],[null,null,null,null,null],["ALT DOLABI",null,null,null,null],["MODÜL  ÖLÇÜLERİ",null,null,null,null],["EN","DERİNLİK","BOY","RAF",null],[470,700,700,1,"4 adet"],[1000,550,770,1,"2 adet"],[860,550,770,1,"1adet"],[450,550,770,1,"1adet"],["ÇEKMECE DOLABI",null,null,null,null],["MODÜL  ÖLÇÜLERİ",null,null,null,null],["EN","DERİNLİK","BOY","ÇEKMECE",null],[500,700,700,3,"2 adet"],[500,550,770,3,"2 adet"],["ALT KÖŞE DOLAP",null,null,null,null],["MODÜL  ÖLÇÜLERİ",null,null,null,"Miktar"],["EN","DERİNLİK","BOY","RAF",null],["900*900",550,770,1,"1 adet"],["ÜST DOLAP",null,null,null,null],["MODÜL  ÖLÇÜLERİ",null,null,null,"Miktar"],["EN","DERİNLİK","BOY","RAF",null],[940,700,450,0,"2 adet"],[null,null,null,null,null],[980,330,700,1,"2 adet"],[950,330,700,2,"2 adet"],["RAF   18MM",null,null,null,null],["MODÜL  ÖLÇÜLERİ",null,null,null,"Miktar"],["EN","DERİNLİK","BOY","RAF",null],[1.8,682,1214,null,"1 adet"],[1.8,682,414,null,"2 adet"],["VATRIN  DOLAP",null,null,null,null],["MODÜL  ÖLÇÜLERİ",null,null,null,"Miktar"],["EN","DERİNLİK","BOY","RAF",null],[1000,700,1700,0,"1 adet"],[470,700,1250,1,"2 adet"],[940,700,1250,1,"1 adet"],[510,480,2140,5,"1 adet"]]');
+
+        function DataModel() {
+            this.en = 0;
+            this.derinlik = 0;
+            this.boy = 0;
+            this.raf = 0;
+            this.adet = 0;
+        }
+        function DataModels(name) {
+            this.name = name;
+            this.modelsSize = [];
+        }
+
+        function Data() {
+            this.name = "null";
+            this.models = [];
+
+        }
+        Data.prototype.addNewModel = function(name) {
+            this.models.push(new DataModels(name));
+        }
+        function setData(data = [[]]) {
+            const newData = new Data();
+            for(let i = 0 ; i < data.length ; i++) {
+
+                for(let j = 0 ; j < data.length ; j++) {
+                    let val = data[i][j];
+                    let newVal = ""+val;
+                    let valmin = newVal.toLowerCase();
+                    if(val && newData.name == "null") {
+                        newData.name = val;
+                    }else {
+                       
+                        if(newVal !== "null" && 
+                        valmin.includes("ALT DOLABI".toLowerCase()) ||
+                        valmin.includes("ÇEKMECE DOLABI".toLowerCase()) ||
+                        valmin.includes("ALT KÖŞE DOLAP".toLowerCase()) ||
+                        valmin.includes("ÜST DOLAP".toLowerCase()) ||
+                        valmin.includes("VATRIN  DOLAP".toLowerCase()) ||
+                        valmin.includes("RAF ".toLowerCase()) 
+                            ) {
+                            newData.addNewModel(valmin);
+                        }else {
+                            if(newVal !== "null" && !valmin.includes("MODÜL  ÖLÇÜLERİ".toLowerCase()) && 
+                            !valmin.includes("EN".toLowerCase()) &&
+                            !valmin.includes("DERİNLİK".toLowerCase()) &&
+                            !valmin.includes("BOY".toLowerCase()) &&
+                            !valmin.includes("ÇEKMECE".toLowerCase()) &&
+                            !valmin.includes("Miktar".toLowerCase()) &&
+                            !valmin.includes("RAF".toLowerCase())) {
+
+                                
+                                if(newData.models[newData.models.length-1]) {
+                                    ////// Alt dolabi 
+
+                                    if(newData.models[newData.models.length-1].name.includes("alt dolabi")) {
+
+                                        switch (j) {
+                                            case 0:
+                                                newData.models[newData.models.length-1].modelsSize.push(new DataModel());
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].en = Number(newVal);
+                                                break;
+                                                case 1:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].derinlik = Number(newVal);
+                                                break;
+                                                case 2:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].boy = Number(newVal);
+                                                break;
+                                                case 3:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].raf = Number(newVal);
+                                                break;
+                                                case 4:
+                
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].adet = Number(newVal.charAt(0));
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    ////// cekmece dolabi 
+
+                                    if(newData.models[newData.models.length-1].name.includes("çekmece dolabi")) {
+
+                                        switch (j) {
+                                            case 0:
+                                                newData.models[newData.models.length-1].modelsSize.push(new DataModel());
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].en = Number(newVal);
+                                                break;
+                                                case 1:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].derinlik = Number(newVal);
+                                                break;
+                                                case 2:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].boy = Number(newVal);
+                                                break;
+                                                case 3:
+                                            
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].raf = Number(newVal);
+                                                break;
+                                                case 4:
+                
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].adet = Number(newVal.charAt(0));
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+
+                                    ///// alt köşe dolap
+
+                                    if(newData.models[newData.models.length-1].name.includes("alt köşe dolap")) {
+
+                                        switch (j) {
+                                            case 0:
+                                                newData.models[newData.models.length-1].modelsSize.push(new DataModel());
+                                                let ens = newVal.split("*");
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].en = Number(ens[0]);
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].en2 = Number(ens[1]);
+                                                break;
+                                                case 1:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].derinlik = Number(newVal);
+                                                break;
+                                                case 2:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].boy = Number(newVal);
+                                                break;
+                                                case 3:
+                                               
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].raf = Number(newVal);
+                                                break;
+                                                case 4:
+                                                newData.models[newData.models.length-1].modelsSize[newData.models[newData.models.length-1].modelsSize.length-1].adet = Number(newVal.charAt(0));
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                   
+
+                                }
+                            }
+                        }
+                    }
+                }   
+            }
+
+            return newData;
+        }
+
+
+        console.log(setData(data));
+
+
+
+    </script> -->
+
+
+    <script>
+        const data = JSON.parse('{"model":"altDolabi","modelSize":{"cNames":["EN","BOY","DERINLIK","RAF","ADET"],"cValues":[470,700,700,1,4]},"materialsSizes":{"govde":{"kalinlik":0.018,"cNames":["EN","BOY","ADET","KENAR BANDI","KENAR BANDI(M)","M2"],"cValues":[{"name":"ALT","value":[684,470,4,"2 BOY 2 EN",9.36,1.3159999999999998]},{"name":"YAN","value":[684,682,8,"2 BOY 1 EN",16.799999999999997,3.8191999999999995]},{"name":"SABIT","value":[100000,434,8,"2 BOY",7.52,0.3472]}]},"arkalik":{"kalinlik":0.008,"cNames":["EN","BOY","ADET","M2"],"cValues":[[-18530,-18300,4,1.2285239999999997]]}}}');
+
+        function createElement(data = {
+   container:document.body,
+   tagName:"div"||"h1"||"h2",
+   innerHTML:"",
+   className:"container",
+   id:"container",
+   style:"",
+   type:"",
+   value:"",
+   placeholder:"",
+   href:"",
+   attributs:[{name:"",value:""}],
+}) {
+      let element;
+      if(data.tagName) element = document.createElement(data.tagName);
+      if(data.container) {
+         data.container.appendChild(element);
+      }else {
+         document.body.appendChild(element);
+      }
+      if(data.id) element.id = data.id;
+      if(data.href) element.href = data.href;
+      if(data.className) element.className = data.className;
+      if(data.innerHTML) element.innerHTML = data.innerHTML;
+      if(data.type) element.type = data.type;
+      if(data.value) element.value = data.value;
+      if(data.attributs) {
+         data.attributs.forEach(at => {
+            element.setAttribute(at.name,at.value);
+         })
+      }
+      return element;
+}
+
+        function  
+        function ModelsData() {
+            this.container = createElement({tagName:"div",className:"modelsData-container"});
+            this.projectName = createElement({tagName:"h1",container:this.container,className:"projectName",innerHTML:"Proje adi : Sina Majnoon Diwan"});
+            
+
+        }
+
+        let modelData = new ModelsData();
+
+    </script>
+
+</body>
+</html>
